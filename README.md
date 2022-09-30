@@ -14,7 +14,8 @@
 
 ```mermaid
 erDiagram
-    CAR ||--o{ NAMED-DRIVER : allows
-    PERSON ||--o{ NAMED-DRIVER : is
-
+    USER ||--|{ TRAVEL_LIST : contains
+    TRAVEL_LIST ||--|{ POINT : contains
+    POINT || -- |{ DIARY : contains
+    POINT || -- |{ PICS : contains
 ```
