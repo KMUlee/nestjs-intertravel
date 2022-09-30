@@ -14,10 +14,44 @@
 
 ```mermaid
 erDiagram
-    USER ||--|{ TRAVEL_LIST : contains
+    USER ||--|{ TRAVEL_LIST : allow
     TRAVEL_LIST ||--|{ POINT : contains
     POINT || -- |{ DIARY : contains
     POINT || -- |{ PICS : contains
     USER || -- |{ DIARY : cotains
     USER || -- |{ PICS : cotains
+
+    USER {
+      string id PK
+      string email
+      string password
+      string name
+    }
+
+    TRAVEL_LIST {
+      string userID FK
+      string id PK
+      string tavelName
+    }
+
+    POINT {
+      string travelID FK
+      string id PK
+      double longitude
+      double latitude
+    }
+
+    DIARY {
+      string pointID FK
+      string userID FK
+      string id PK
+      string body
+    }
+
+    PICS {
+      string pointID FK
+      string userID FK
+      string id PK
+      MEDIUMBLOB image
+    }
 ```
