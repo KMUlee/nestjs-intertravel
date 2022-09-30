@@ -18,4 +18,6 @@ erDiagram
     TRAVEL_LIST ||--|{ POINT : contains
     POINT || -- |{ DIARY : contains
     POINT || -- |{ PICS : contains
+    USER || -- |{ DIARY : cotains
+    USER || -- |{ PICS : cotains
 ```
