@@ -58,13 +58,13 @@ erDiagram
 
 ```mermaid
 gitGraph
-  commit mainpage
-  commit
-  branch develop
-  commit
-  commit
-  commit
-  checkout main
-  commit
-  commit
+  branch login
+  commit id: "로그인"
+  commit id: "회원가입"
+  branch regist
+  commit id: "회원가입 양식"
+  checkout login
+  merge regist id: "move to login"
+  chekout main
+  merge login id: "success login" tag: "메인 페이지 이동" type: REVERSE
 ```
