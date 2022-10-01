@@ -58,13 +58,25 @@ erDiagram
 
 ```mermaid
 gitGraph
-  branch login
-  commit id: "로그인"
-  commit id: "회원가입"
-  branch regist
-  commit id: "회원가입 양식"
-  checkout login
-  merge regist id: "move to login"
-  chekout main
-  merge login id: "success login" tag: "메인 페이지 이동" type: REVERSE
+  commit id: "1"
+       commit id: "2"
+       branch nice_feature
+       checkout nice_feature
+       commit id: "3"
+       checkout main
+       commit id: "4"
+       checkout nice_feature
+       branch very_nice_feature
+       checkout very_nice_feature
+       commit id: "5"
+       checkout main
+       commit id: "6"
+       checkout nice_feature
+       commit id: "7"
+       checkout main
+       merge nice_feature id: "customID" tag: "customTag" type: REVERSE
+       checkout very_nice_feature
+       commit id: "8"
+       checkout main
+       commit id: "9"
 ```
