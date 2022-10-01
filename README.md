@@ -55,3 +55,16 @@ erDiagram
       MEDIUMBLOB image
     }
 ```
+
+```mermaid
+gitGraph
+  commit mainpage
+  commit
+  branch develop
+  commit
+  commit
+  commit
+  checkout main
+  commit
+  commit
+```
