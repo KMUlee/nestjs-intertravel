@@ -15,11 +15,9 @@
 ```mermaid
 erDiagram
     USER ||--|{ TRAVEL_LIST : allow
-    TRAVEL_LIST ||--|{ POINT : contains
-    POINT || -- |{ DIARY : contains
-    POINT || -- |{ PICS : contains
-    USER || -- |{ DIARY : cotains
-    USER || -- |{ PICS : cotains
+    TRAVEL_LIST || -- |{ DIARY : contains
+    TRAVEL_LIST || -- |{ PICS : contains
+
 
     USER {
       string id PK
