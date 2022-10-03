@@ -31,26 +31,19 @@ erDiagram
     TRAVEL_LIST {
       string userID FK
       string id PK
+      double longitude
+      double latitude
       string tavelName
     }
 
-    POINT {
-      string travelID FK
-      string id PK
-      double longitude
-      double latitude
-    }
-
     DIARY {
-      string pointID FK
-      string userID FK
+      string travelId FK
       string id PK
       string body
     }
 
     PICS {
-      string pointID FK
-      string userID FK
+      string travelId FK
       string id PK
       MEDIUMBLOB image
     }
