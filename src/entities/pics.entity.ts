@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
+import { TravelListEntity } from './travelList.entity';
 
 @Entity('Pics')
 export class PicsEntity {
@@ -7,4 +8,7 @@ export class PicsEntity {
 
   @Column({ type: 'mediumblob' })
   image: string;
+
+  @ManyToOne(() => TravelListEntity, (travelList) => travelList.id)
+  travelId: TravelListEntity;
 }
