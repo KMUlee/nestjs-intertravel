@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
-import { TravelListEntity } from './travelList.entity';
+
+import { TravelsEntity } from './travels.entity';
 
 @Entity('Pics')
 export class PicsEntity {
@@ -9,6 +10,6 @@ export class PicsEntity {
   @Column({ type: 'mediumblob' })
   image: string;
 
-  @ManyToOne(() => TravelListEntity, (travelList) => travelList.id)
-  travelId: TravelListEntity;
+  @ManyToOne(() => TravelsEntity, (travel) => travel.id)
+  travelId: TravelsEntity;
 }

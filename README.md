@@ -15,8 +15,9 @@
 ```mermaid
 erDiagram
     USER ||--|{ TRAVEL_LIST : allow
-    TRAVEL_LIST || -- |{ DIARY : contains
-    TRAVEL_LIST || -- |{ PICS : contains
+    TRAVEL_LIST ||--|{ TRAVEL: contains
+    TRAVEL || -- |{ DIARY : contains
+    TRAVEL || -- |{ PICS : contains
 
 
     USER {
@@ -28,21 +29,26 @@ erDiagram
 
     TRAVEL_LIST {
       string userID FK
-      string id PK
-      double longitude
-      double latitude
+      number id PK
       string tavelName
     }
 
+    TRAVEL {
+      number id PK
+      double longitude
+      double latitude
+      number travelListId FK
+    }
+
     DIARY {
-      string travelId FK
-      string id PK
+      number travelId FK
+      number id PK
       string body
     }
 
     PICS {
-      string travelId FK
-      string id PK
+      number travelId FK
+      number id PK
       MEDIUMBLOB image
     }
 ```
