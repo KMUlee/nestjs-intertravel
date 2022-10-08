@@ -1,15 +1,19 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 import { TravelsEntity } from './travels.entity';
 import { UserEntity } from './user.entity';
 
 @Entity('TravelList')
 export class TravelListEntity {
-  @PrimaryColumn()
-  id: string;
-
-  @Column({ length: 30 })
-  travelName: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @ManyToOne(() => UserEntity, (user) => user.id)
   userId: UserEntity;

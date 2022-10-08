@@ -30,13 +30,13 @@ erDiagram
     TRAVEL_LIST {
       string userID FK
       number id PK
-      string tavelName
     }
 
     TRAVEL {
       number id PK
       double longitude
       double latitude
+      string tavelName
       number travelListId FK
     }
 

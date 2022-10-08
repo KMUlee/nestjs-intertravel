@@ -14,6 +14,9 @@ export class TravelsEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ length: 30 })
+  travelName: string;
+
   @ManyToOne(() => TravelListEntity, (travelList) => travelList.id)
   travelListId: TravelListEntity;
 
