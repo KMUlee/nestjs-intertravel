@@ -8,15 +8,15 @@ export class UsersController {
   constructor(readonly userService: UsersService) {}
 
   @Post('/login')
-  async login(@Body() loginData: LoginUserDto, @Res() res) {
+  async login(@Body() loginData: LoginUserDto) {
     console.log(loginData);
     const { email, password } = loginData;
     this.userService.login(email, password);
-    return res.status(200).send();
+    return;
   }
 
   @Post('/logout')
-  async logout(@Body() logoutData, @Res() res) {
+  async logout(@Body() logoutData) {
     console.log(logoutData);
     //not implement
     return;
