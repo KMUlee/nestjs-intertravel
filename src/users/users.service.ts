@@ -49,17 +49,17 @@ export class UsersService {
     });
   }
 
-  async login(emailAddress: string, password: string): Promise<void> {
+  async login(emailAddress: string, password: string) {
     const userExist = await this.checkUserExists(emailAddress);
     if (!userExist) {
-      throw new NotFoundException('해당 이메일을 찾을 수 없습니다.');
+      throw new UnprocessableEntityException('해당 이메일을 찾을 수 없습니다.');
     }
     const userLogin = await this.usersRepository.findOneBy({
       email: emailAddress,
       password: password,
     });
     if (!userLogin) {
-      throw new NotFoundException('비밀번호를 다시 확인하십시오');
+      throw new UnprocessableEntityException('비밀번호를 다시 확인하십시오');
     }
   }
 }
