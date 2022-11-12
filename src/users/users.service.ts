@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  UnprocessableEntityException,
-} from '@nestjs/common';
+import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Connection, Repository } from 'typeorm';
@@ -49,7 +45,7 @@ export class UsersService {
     });
   }
 
-  async login(emailAddress: string, password: string) {
+  async login(emailAddress: string, password: string): Promise<string> {
     const userExist = await this.checkUserExists(emailAddress);
     if (!userExist) {
       throw new UnprocessableEntityException('해당 이메일을 찾을 수 없습니다.');
@@ -61,5 +57,6 @@ export class UsersService {
     if (!userLogin) {
       throw new UnprocessableEntityException('비밀번호를 다시 확인하십시오');
     }
+    return ulid();
   }
 }
