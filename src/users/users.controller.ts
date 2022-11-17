@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
+import { TravelListEntity } from 'src/entities/travelList.entity';
 import { CreateLibrayDto } from './dto/CreateLibrayDto.dto';
 import { CreateUserDto } from './dto/CreateUserDto.dto';
 import { LoginUserDto } from './dto/LoginUserDto.dto';
@@ -32,7 +33,7 @@ export class UsersController {
   }
 
   @Post('/diary')
-  async listDiary(@Body() userData: UserTokenDto): Promise<any> {
+  async listDiary(@Body() userData: UserTokenDto): Promise<TravelListEntity[]> {
     console.log(userData);
     const { token } = userData;
     
