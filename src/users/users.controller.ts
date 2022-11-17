@@ -23,10 +23,10 @@ export class UsersController {
   }
 
   @Get(':id')
-  async getUserInfo(@Param('id') userId: string): Promise<string> {
-    console.log(userId);
+  async getUserInfo(@Param('id') email: string): Promise<string> {
+    console.log(email);
     
-    return this.userService.testFunction(userId);
+    return this.userService.testFunction(email);
   }
 
   @Post()
