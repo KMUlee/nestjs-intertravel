@@ -33,7 +33,7 @@ export class UsersController {
   }
 
   @Post('/diary')
-  async listDiary(@Body() userData: UserTokenDto): Promise<TravelListEntity[]> {
+  async listDiary(@Body() userData: UserTokenDto) {
     console.log(userData);
     const { token } = userData;
     
