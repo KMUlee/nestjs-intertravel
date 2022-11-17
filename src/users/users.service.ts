@@ -45,6 +45,15 @@ export class UsersService {
     });
   }
 
+  async testFunction(userId: string): Promise<string> {
+    const user = await this.usersRepository.findOneBy({ id: userId });
+    if (!user) {
+      throw new UnprocessableEntityException('해당 유저를 찾을 수 없습니다.');
+    } else {
+      return user.id;
+    }
+  }
+
   async login(emailAddress: string, password: string): Promise<string> {
     const userExist = await this.checkUserExists(emailAddress);
     if (!userExist) {
