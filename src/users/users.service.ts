@@ -48,6 +48,7 @@ export class UsersService {
    async travelList(userToken: string) {
     //not implement
     const user = await this.usersRepository.findOneBy({ id: userToken });
+    console.log(user.travelList);
     
     return user.travelList;
   }
