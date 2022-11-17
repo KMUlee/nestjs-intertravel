@@ -45,6 +45,14 @@ export class UsersService {
     });
   }
 
+   async travelList(userToken: string) {
+    //not implement
+    const user = await this.usersRepository.findOneBy({ id: userToken });
+    
+    return user.travelList;
+  }
+
+
   async testFunction(email: string): Promise<string> {
     const user = await this.usersRepository.findOneBy({ email: email });
     if (!user) {
@@ -66,6 +74,7 @@ export class UsersService {
     if (!userLogin) {
       throw new UnprocessableEntityException('비밀번호를 다시 확인하십시오');
     }
-    return ulid();
+    
+    return userLogin.id;
   }
 }
