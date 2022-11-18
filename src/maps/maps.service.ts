@@ -33,14 +33,14 @@ export class MapsService {
             request(options, function (error, response, body) {
                 if (error) {
                     console.log(error);
-                    throw new UnprocessableEntityException(error);
+                    
                 } else {
                     console.log(body);
                     
                 }
-            })
+            });
 
-            
+            return;
 
         }
     }
