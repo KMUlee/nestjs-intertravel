@@ -37,7 +37,7 @@ export class MapsService {
             return request(options, function (error, response, body) {
                 if (error) {
                     console.log(error);
-                    throw new UnprocessableEntityException(error);
+                    resolve(error);
                 } else {
                     console.log(body);
                     const result = JSON.parse(body);
