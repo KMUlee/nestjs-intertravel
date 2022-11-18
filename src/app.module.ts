@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
+import { MapsModule } from './maps/maps.module';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
 
@@ -11,6 +12,7 @@ dotenv.config({
 @Module({
   imports: [
     UsersModule,
+    MapsModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DATABASE_HOST,
