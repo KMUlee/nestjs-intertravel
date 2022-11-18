@@ -1,5 +1,6 @@
 import { Injectable, UnprocessableEntityException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { resolve } from "path";
 const request = require("request");
 
 import { Connection, Repository } from 'typeorm';
@@ -16,6 +17,9 @@ export class MapsService {
         return testData;
     }
 
+    async shootRequest(options) {
+    }
+
     async reverseGio(id: string, latitude: string, longitude: string): Promise<any> {
         const user = await this.usersRepository.findOneBy({ id: id });
         if (!user) {
@@ -30,14 +34,14 @@ export class MapsService {
                 }
 
             };
-            request(options, function (error, response, body) {
+            return request(options, function (error, response, body) {
                 if (error) {
                     console.log(error);
                     throw new UnprocessableEntityException(error);
                 } else {
                     console.log(body);
                     const result = JSON.parse(body);
-                    return result;
+                    resolve( result);
                 }
             })
             
