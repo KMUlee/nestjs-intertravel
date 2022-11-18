@@ -1,5 +1,6 @@
 import { Injectable, UnprocessableEntityException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { rejects } from "assert";
 import { resolve } from "path";
 const request = require("request");
 
@@ -38,14 +39,18 @@ export class MapsService {
             request(options, function (error, response, body) {
                 if (error) {
                     console.log(error);
-                    resolve(error);
+                    reject(error);
                 } else {
                     console.log(body);
                     resolve( body);
                 }
             });
         });
-        return prepareResponse;
+        if (!rejects){
+            throw new UnprocessableEntityException(rejects);
+        }else{
+            return prepareResponse;
+        }
             
 
         }
