@@ -17,8 +17,7 @@ export class MapsService {
         return testData;
     }
 
-    async shootRequest(options) {
-    }
+    
 
     async reverseGio(id: string, latitude: string, longitude: string): Promise<any> {
         const user = await this.usersRepository.findOneBy({ id: id });
@@ -34,17 +33,19 @@ export class MapsService {
                 }
 
             };
-            return request(options, function (error, response, body) {
+            const prepareResponse = await new Promise((resolve, reject) => {
+
+            request(options, function (error, response, body) {
                 if (error) {
                     console.log(error);
                     resolve(error);
                 } else {
                     console.log(body);
-                    const result = JSON.parse(body);
-                    resolve( result);
+                    resolve( body);
                 }
-            })
-            
+            });
+        });
+        return prepareResponse;
             
 
         }
