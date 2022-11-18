@@ -46,6 +46,8 @@ export class MapsService {
                 }
             });
         });
+        console.log(rejects);
+        console.log(resolve);
         if (!rejects){
             throw new UnprocessableEntityException(rejects);
         }else{
