@@ -4,9 +4,9 @@ export class ReverseGioDto {
   @IsString()
   readonly id: string;
 
-  @IsString()
-  readonly latitude: string;
+  
+  readonly latitude: any;
 
-  @IsString()
-  readonly longitude: string;
+  
+  readonly longitude: any;
 }
