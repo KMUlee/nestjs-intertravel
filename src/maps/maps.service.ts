@@ -36,7 +36,7 @@ export class MapsService {
                     throw new UnprocessableEntityException(error);
                 } else {
                     console.log(body);
-                    return body;
+                    
                 }
             })
 
