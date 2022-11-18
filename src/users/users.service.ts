@@ -41,6 +41,8 @@ export class UsersService {
       user.name = name;
       user.email = email;
       user.password = password;
+      user.travelList = [];
+      
       await manager.save(user);
     });
   }
