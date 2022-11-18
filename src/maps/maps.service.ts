@@ -36,11 +36,11 @@ export class MapsService {
                     throw new UnprocessableEntityException(error);
                 } else {
                     console.log(body);
-                    return body;
-                    
+                    const result = JSON.parse(body);
+                    return result;
                 }
-            });
-
+            })
+            
             
 
         }
