@@ -5,8 +5,8 @@ export class ReverseGioDto {
   readonly id: string;
 
   
-  readonly latitude: any;
+  readonly latitude: string;
 
   
-  readonly longitude: any;
+  readonly longitude: string;
 }
