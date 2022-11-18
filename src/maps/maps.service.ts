@@ -13,7 +13,7 @@ export class MapsService {
     ) { }
 
     async testFunction(testData: string): Promise<string> {
-        return "test";
+        return testData;
     }
 
     async reverseGio(id: string, latitude: string, longitude: string): Promise<any> {

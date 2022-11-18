@@ -11,8 +11,8 @@ dotenv.config({
 
 @Module({
   imports: [
-    UsersModule,
     MapsModule,
+    UsersModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DATABASE_HOST,
