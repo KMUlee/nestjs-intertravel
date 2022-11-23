@@ -48,23 +48,31 @@ export class TravelService {
       } else {
         user.travelList.push(travel);
       }
-      await this.createTravels(travelName, longitude, latitude, travelBody);
+      await this.saveTravelUsingTransaction(
+        travelName,
+        longitude,
+        latitude,
+        travelBody,
+      );
     }
   }
 
-  private async createTravels(
+  private async saveTravelUsingTransaction(
     travelName: string,
     longitude: number,
     latitude: number,
     travelBody: string,
   ) {
-    const travels = new TravelsEntity();
-    travels.travelName = travelName;
-    travels.longitude = longitude;
-    travels.latitude = latitude;
-    const diary = new DiaryEntity();
-    diary.body = travelBody;
-    travels.diaris = [diary];
-    await this.travelListRepository.save(travels);
+    await this.connection.transaction(async (manager) => {
+      const travels = new TravelsEntity();
+      travels.travelName = travelName;
+      travels.longitude = longitude;
+      travels.latitude = latitude;
+      const diary = new DiaryEntity();
+      diary.body = travelBody;
+      travels.diaris = [diary];
+      await this.travelListRepository.save(travels);
+      await manager.save(travels);
+    });
   }
 }
