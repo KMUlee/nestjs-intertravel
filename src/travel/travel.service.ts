@@ -52,7 +52,7 @@ export class TravelService {
   private async saveTravelListUsingTransaction(user: UserEntity) {
     await this.connection.transaction(async (manager) => {
       const travel = new TravelListEntity();
-      travel.id = user.id;
+      travel.userId = user;
       console.log(travel);
 
       console.log(user.travelList);
