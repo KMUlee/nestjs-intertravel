@@ -1,4 +1,4 @@
-import {IsLatitude, IsLongitude, IsString} from 'class-validator';
+import { IsLatitude, IsLongitude, IsString } from 'class-validator';
 
 export class ReverseGioDto {
   @IsString()

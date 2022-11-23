@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  JoinTable,
   ManyToOne,
   OneToMany,
   PrimaryColumn,
@@ -13,7 +14,7 @@ import { UserEntity } from './user.entity';
 @Entity('TravelList')
 export class TravelListEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @ManyToOne(() => UserEntity, (user) => user.id)
   userId: UserEntity;

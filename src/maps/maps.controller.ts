@@ -1,12 +1,12 @@
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
-import { MapsService } from "./maps.service";
-import { ReverseGioDto } from "./dto/ReverseGioDto.dto";
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { MapsService } from './maps.service';
+import { ReverseGioDto } from './dto/ReverseGioDto.dto';
 @Controller('maps')
 export class mapsController {
   constructor(readonly mapsService: MapsService) {}
 
   @Get(':test')
-  async test(@Param('test') testData:string): Promise<string> {
+  async test(@Param('test') testData: string): Promise<string> {
     return this.mapsService.testFunction(testData);
   }
 

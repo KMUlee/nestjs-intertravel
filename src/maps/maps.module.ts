@@ -5,8 +5,8 @@ import { mapsController } from './maps.controller';
 import { MapsService } from './maps.service';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([UserEntity])],
-    controllers: [mapsController],
-    providers: [MapsService],
+  imports: [TypeOrmModule.forFeature([UserEntity])],
+  controllers: [mapsController],
+  providers: [MapsService],
 })
 export class MapsModule {}

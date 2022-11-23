@@ -12,7 +12,7 @@ import { TravelListEntity } from './travelList.entity';
 @Entity('Travels')
 export class TravelsEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column({ length: 30 })
   travelName: string;
