@@ -48,6 +48,7 @@ export class TravelService {
       } else {
         user.travelList.push(travel);
       }
+      console.log('After', user.travelList);
       await this.saveTravelUsingTransaction(
         travelName,
         longitude,
