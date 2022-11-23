@@ -5,6 +5,8 @@ import { Connection, Repository } from 'typeorm';
 
 import { UserEntity } from '../entities/user.entity';
 import { TravelListEntity } from '../entities/travelList.entity';
+import { TravelsEntity } from '../entities/travels.entity';
+import { DiaryEntity } from '../entities/diary.entity';
 
 @Injectable()
 export class TravelService {
@@ -24,5 +26,39 @@ export class TravelService {
     } else {
       return user.travelList;
     }
+  }
+
+  async createTravel(
+    userToken: string,
+    longitude: number,
+    latitude: number,
+    travelName: string,
+    travelBody: string,
+  ) {
+    const user = await this.userRepository.findOneBy({ id: userToken });
+    if (!user) {
+      throw new UnprocessableEntityException('해당 유저가 존재하지 않습니다.');
+    } else {
+      const travelList = user.travelList;
+      const travel = new TravelListEntity();
+      travelList.push(travel);
+      await this.createTravels(travelName, longitude, latitude, travelBody);
+    }
+  }
+
+  private async createTravels(
+    travelName: string,
+    longitude: number,
+    latitude: number,
+    travelBody: string,
+  ) {
+    const travels = new TravelsEntity();
+    travels.travelName = travelName;
+    travels.longitude = longitude;
+    travels.latitude = latitude;
+    const diary = new DiaryEntity();
+    diary.body = travelBody;
+    travels.diaris = [diary];
+    await this.travelListRepository.save(travels);
   }
 }

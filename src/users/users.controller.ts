@@ -11,7 +11,7 @@ export class UsersController {
 
   @Post('/login')
   async login(@Body() loginData: LoginUserDto): Promise<string> {
-    console.log(loginData);
+    console.log('users/login Post ->', loginData);
     const { email, password } = loginData;
 
     return this.userService.login(email, password);
@@ -19,21 +19,21 @@ export class UsersController {
 
   @Post('/logout')
   async logout(@Body() logoutData) {
-    console.log(logoutData);
+    console.log('users/logout Post ->', logoutData);
     //not implement
     return;
   }
 
   @Get(':id')
   async getUserInfo(@Param('id') email: string): Promise<string> {
-    console.log(email);
+    console.log('users/ Get ->', email);
 
     return this.userService.testFunction(email);
   }
 
   @Post('/diary')
   async listDiary(@Body() userData: UserTokenDto) {
-    console.log(userData);
+    console.log('users/diary Post ->', userData);
     const { token } = userData;
 
     //not implement
@@ -47,7 +47,7 @@ export class UsersController {
 
   @Post()
   async createUser(@Body() registData: CreateUserDto): Promise<void> {
-    console.log(registData);
+    console.log('users/ Post -> ', registData);
     const { email, name, password } = registData;
     return this.userService.createUser(name, email, password);
   }
