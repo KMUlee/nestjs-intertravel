@@ -42,19 +42,18 @@ export class UsersService {
       user.email = email;
       user.password = password;
       user.travelList = [];
-      
+
       await manager.save(user);
     });
   }
 
-   async travelList(userToken: string) {
+  async travelList(userToken: string) {
     //not implement
     const user = await this.usersRepository.findOneBy({ id: userToken });
     console.log(user.travelList);
-    
+
     return user.travelList;
   }
-
 
   async testFunction(email: string): Promise<string> {
     const user = await this.usersRepository.findOneBy({ email: email });
@@ -77,7 +76,11 @@ export class UsersService {
     if (!userLogin) {
       throw new UnprocessableEntityException('비밀번호를 다시 확인하십시오');
     }
-    
+
     return userLogin.id;
+  }
+
+  async getProfile() {
+    return this.connection.query('select id, name, email from user');
   }
 }

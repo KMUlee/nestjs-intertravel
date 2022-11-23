@@ -28,7 +28,7 @@ export class UsersController {
   @Get(':id')
   async getUserInfo(@Param('id') email: string): Promise<string> {
     console.log(email);
-    
+
     return this.userService.testFunction(email);
   }
 
@@ -36,9 +36,14 @@ export class UsersController {
   async listDiary(@Body() userData: UserTokenDto) {
     console.log(userData);
     const { token } = userData;
-    
+
     //not implement
     return this.userService.travelList(token);
+  }
+
+  @Get()
+  async getProfile() {
+    return this.userService.getProfile();
   }
 
   @Post()
@@ -47,5 +52,4 @@ export class UsersController {
     const { email, name, password } = registData;
     return this.userService.createUser(name, email, password);
   }
-  
 }
