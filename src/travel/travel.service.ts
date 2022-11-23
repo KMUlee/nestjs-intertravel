@@ -39,9 +39,8 @@ export class TravelService {
     if (!user) {
       throw new UnprocessableEntityException('해당 유저가 존재하지 않습니다.');
     } else {
-      const travelList = user.travelList;
       const travel = new TravelListEntity();
-      travelList.push(travel);
+      user.travelList.push(travel);
       await this.createTravels(travelName, longitude, latitude, travelBody);
     }
   }
