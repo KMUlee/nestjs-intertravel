@@ -41,7 +41,13 @@ export class TravelService {
     } else {
       const travel = new TravelListEntity();
       console.log(travel);
+      console.log(travel.id);
       console.log(user.travelList);
+      if (user.travelList === undefined) {
+        user.travelList = [travel];
+      } else {
+        user.travelList.push(travel);
+      }
       await this.createTravels(travelName, longitude, latitude, travelBody);
     }
   }
