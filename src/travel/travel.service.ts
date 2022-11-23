@@ -53,7 +53,7 @@ export class TravelService {
     await this.connection.transaction(async (manager) => {
       const travel = new TravelListEntity();
       console.log(travel);
-      console.log(travel.id);
+
       console.log(user.travelList);
       if (user.travelList === undefined) {
         user.travelList = [travel];
@@ -62,6 +62,7 @@ export class TravelService {
       }
       console.log('After', user.travelList);
       await manager.save(user);
+      console.log(travel.id);
     });
   }
 
