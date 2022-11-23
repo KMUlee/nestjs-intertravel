@@ -81,6 +81,6 @@ export class UsersService {
   }
 
   async getProfile() {
-    return this.connection.query('select id, name, email from user');
+    return this.connection.query('select id, name, email from User');
   }
 }
