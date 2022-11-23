@@ -39,6 +39,18 @@ export class TravelService {
     if (!user) {
       throw new UnprocessableEntityException('해당 유저가 존재하지 않습니다.');
     } else {
+      await this.saveTravelListUsingTransaction(user);
+      await this.saveTravelUsingTransaction(
+        travelName,
+        longitude,
+        latitude,
+        travelBody,
+      );
+    }
+  }
+
+  private async saveTravelListUsingTransaction(user: UserEntity) {
+    await this.connection.transaction(async (manager) => {
       const travel = new TravelListEntity();
       console.log(travel);
       console.log(travel.id);
@@ -49,13 +61,8 @@ export class TravelService {
         user.travelList.push(travel);
       }
       console.log('After', user.travelList);
-      await this.saveTravelUsingTransaction(
-        travelName,
-        longitude,
-        latitude,
-        travelBody,
-      );
-    }
+      await manager.save(user);
+    });
   }
 
   private async saveTravelUsingTransaction(
