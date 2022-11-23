@@ -6,7 +6,7 @@ export class TravelController {
   constructor(readonly travelService: TravelService) {}
 
   @Post('/list')
-  async getTravelList(@Body() token: string) {
-    return this.travelService.travelList(token);
+  async getTravelList(@Body() body: JSON) {
+    return this.travelService.travelList(body['token']);
   }
 }
