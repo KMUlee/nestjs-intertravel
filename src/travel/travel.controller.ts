@@ -9,6 +9,7 @@ export class TravelController {
 
   @Post('/list')
   async getTravelList(@Body() body: JSON):Promise<Object> {
+    console.log('travel/list Post ->', body);
     return this.travelService.travelList(body['token']);
   } 
 
