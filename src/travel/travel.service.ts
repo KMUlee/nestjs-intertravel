@@ -54,12 +54,15 @@ export class TravelService {
     await this.connection.transaction(async (manager) => {
       const travel = new TravelListEntity();
       travel.userId = user;
+      
       console.log(travel);
 
       console.log(user.travelList);
       if (user.travelList === undefined) {
+        await this.travelListRepository.save(travel);
         user.travelList = [travel];
       } else {
+        await this.travelListRepository.save(travel);
         user.travelList.push(travel);
       }
       console.log('After', user.travelList);
