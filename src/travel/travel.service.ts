@@ -20,7 +20,8 @@ export class TravelService {
 
   async travelList(userToken: string) {
     //not implement
-    const user = await this.userRepository.findOneBy({ id: userToken });
+    // const user = await this.userRepository.findOneBy({ id: userToken });
+    const user = await this.userRepository.findOne({where: {id: userToken}, relations: ['travelList']});
     if (!user) {
       throw new UnprocessableEntityException('해당 유저가 존재하지 않습니다.');
     } else {
@@ -52,24 +53,23 @@ export class TravelService {
 
   private async saveTravelListUsingTransaction(user: UserEntity) {
     await this.connection.transaction(async (manager) => {
-      const travel = new TravelListEntity();
-      travel.userId = user;
+      const travelList = new TravelListEntity();
+      travelList.userId = user;
       
-      console.log(travel);
+      console.log(travelList);
 
       console.log(user.travelList);
       if (user.travelList === undefined) {
-        await this.travelListRepository.save(travel);
-        user.travelList = [travel];
+        await this.travelListRepository.save(travelList);
+        user.travelList = [travelList];
       } else {
-        await this.travelListRepository.save(travel);
-        user.travelList.push(travel);
+        await this.travelListRepository.save(travelList);
+        user.travelList.push(travelList);
       }
       console.log('After', user.travelList);
-      await this.userRepository.save("user");
       await manager.save(user);
       
-      console.log(travel.id);
+      console.log(travelList.id);
     });
   }
 
