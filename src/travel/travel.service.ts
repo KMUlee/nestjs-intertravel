@@ -35,8 +35,7 @@ export class TravelService {
       console.log("travelList ->",travelList);
       const returnBody =[];
       for (const tmp of travelList) {
-        const travelContent = await this.travelsRepository.findOne({where: {id: tmp.id}, relations: ['diaris']});
-        const travelPics = await this.picsRepository.findOne({where: {id: tmp.id}, relations: ['pics']});
+        const travelContent = await this.travelsRepository.findOne({where: {id: tmp.id}, relations: ['diaris','pics']});
         returnBody.push(travelContent);
       }
       
