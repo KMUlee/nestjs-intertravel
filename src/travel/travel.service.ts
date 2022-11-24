@@ -7,6 +7,7 @@ import { UserEntity } from '../entities/user.entity';
 import { TravelListEntity } from '../entities/travelList.entity';
 import { TravelsEntity } from '../entities/travels.entity';
 import { DiaryEntity } from '../entities/diary.entity';
+import { PicsEntity } from 'src/entities/pics.entity';
 
 @Injectable()
 export class TravelService {
@@ -20,6 +21,8 @@ export class TravelService {
     private travelsRepository: Repository<TravelsEntity>,
     @InjectRepository(DiaryEntity)
     private diaryRepository: Repository<DiaryEntity>,
+    @InjectRepository(PicsEntity)
+    private picsRepository: Repository<PicsEntity>,
     ) {}
 
   async travelList(userToken: string) {
@@ -44,12 +47,14 @@ export class TravelService {
     }
   }
 
+  
   async createTravel(
     userToken: string,
     longitude: number,
     latitude: number,
     travelName: string,
     travelBody: string,
+    createdAt:string,mainImage:string
   ) {
     const user = await this.userRepository.findOneBy({ id: userToken });
     if (!user) {
@@ -58,7 +63,7 @@ export class TravelService {
       await this.saveTravelListUsingTransaction(user, travelName,
         longitude,
         latitude,
-        travelBody);
+        travelBody,mainImage,createdAt);
       
     }
   }
@@ -66,10 +71,13 @@ export class TravelService {
   private async saveTravelListUsingTransaction(user: UserEntity,travelName: string,
     longitude: number,
     latitude: number,
-    travelBody: string,) {
+    travelBody: string,mainImage:string,createdAt:string) {
     await this.connection.transaction(async (manager) => {
       const travelList = new TravelListEntity();
       travelList.userId = user;
+      const pics = new PicsEntity();
+      pics.image = mainImage;
+      
       
       const travels = new TravelsEntity();
       travels.travelName = travelName;
@@ -80,6 +88,8 @@ export class TravelService {
       diary.body = travelBody;
       travels.diaris = [diary];
       diary.travelId = travels;
+      pics.travelId = travels;
+      travels.createdAt = createdAt;
       console.log(travelList);
 
       console.log(user.travelList);
@@ -95,10 +105,10 @@ export class TravelService {
       await this.travelListRepository.save(travelList);
       await this.travelsRepository.save(travels);
       await this.diaryRepository.save(diary);
-      
+      await this.picsRepository.save(pics);
       console.log(travelList.id);
     });
   }
 
-
+  
 }

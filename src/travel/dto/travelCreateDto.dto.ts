@@ -1,4 +1,4 @@
-import { IsLatitude, IsLongitude, IsString } from 'class-validator';
+import { IsDate, IsLatitude, IsLongitude, IsString } from 'class-validator';
 
 export class travelCreateDto {
   @IsString()
@@ -15,4 +15,10 @@ export class travelCreateDto {
 
   @IsString()
   readonly travelBody: string;
+
+  @IsString()
+  readonly createdAt: string;
+
+  readonly mainImage: string;
+  
 }

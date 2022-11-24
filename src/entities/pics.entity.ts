@@ -1,10 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 import { TravelsEntity } from './travels.entity';
 
 @Entity('Pics')
 export class PicsEntity {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: string;
 
   @Column({ type: 'mediumblob' })

@@ -31,4 +31,7 @@ export class TravelsEntity {
 
   @Column({ type: 'double' })
   latitude: number;
+
+  @Column({ length: 30 })
+  createdAt: string;
 }
