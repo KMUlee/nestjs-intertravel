@@ -107,6 +107,7 @@ export class TravelService {
         user.travelList.push(travels);
         this.travelsRepository.save(travels);
       }
+      travels.userId=user;
       console.log('After', user.travelList);
       await manager.save(user);
       await this.travelsRepository.save(travels);
