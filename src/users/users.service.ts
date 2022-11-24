@@ -22,6 +22,7 @@ export class UsersService {
       );
     }
     await this.saveUserUsingTransaction(name, email, password);
+    return {status:'success'};
   }
 
   private async checkUserExists(emailAddress: string): Promise<boolean> {
