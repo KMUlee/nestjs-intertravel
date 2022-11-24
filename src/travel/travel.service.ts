@@ -16,7 +16,9 @@ export class TravelService {
     @InjectRepository(TravelListEntity)
     private travelListRepository: Repository<TravelListEntity>,
     private connection: Connection,
-  ) {}
+    @InjectRepository(TravelsEntity)
+    private travelsRepository: Repository<TravelsEntity>,
+    ) {}
 
   async travelList(userToken: string) {
     //not implement
@@ -46,9 +48,7 @@ export class TravelService {
         longitude,
         latitude,
         travelBody);
-      await this.saveTravelUsingTransaction(
-       
-      );
+      
     }
   }
 
@@ -82,16 +82,12 @@ export class TravelService {
       }
       console.log('After', user.travelList);
       await manager.save(user);
+      await this.travelListRepository.save(travelList);
+      await this.travelsRepository.save(travels);
       
       console.log(travelList.id);
     });
   }
 
-  private async saveTravelUsingTransaction(
-    
-  ) {
-    await this.connection.transaction(async (manager) => {
-      
-    });
-  }
+
 }
