@@ -21,12 +21,12 @@ export class TravelService {
   async travelList(userToken: string) {
     //not implement
     // const user = await this.userRepository.findOneBy({ id: userToken });
-    const user = await this.userRepository.findOne({where: {id: userToken}, relations: ['travelList']});
+    const user = await this.userRepository.findOne({where: {id: userToken}, relations: ['travelList','travel']});
     if (!user) {
       throw new UnprocessableEntityException('해당 유저가 존재하지 않습니다.');
     } else {
       console.log(user.travelList);
-      return user.travelList;
+      return user.travelList[0];
     }
   }
 
@@ -41,21 +41,34 @@ export class TravelService {
     if (!user) {
       throw new UnprocessableEntityException('해당 유저가 존재하지 않습니다.');
     } else {
-      await this.saveTravelListUsingTransaction(user);
-      await this.saveTravelUsingTransaction(
-        travelName,
+      await this.saveTravelListUsingTransaction(user, travelName,
         longitude,
         latitude,
-        travelBody,
+        travelBody);
+      await this.saveTravelUsingTransaction(
+       
       );
     }
   }
 
-  private async saveTravelListUsingTransaction(user: UserEntity) {
+  private async saveTravelListUsingTransaction(user: UserEntity,travelName: string,
+    longitude: number,
+    latitude: number,
+    travelBody: string,) {
     await this.connection.transaction(async (manager) => {
       const travelList = new TravelListEntity();
       travelList.userId = user;
       
+      const travels = new TravelsEntity();
+      travels.travelName = travelName;
+      travels.longitude = longitude;
+      travels.latitude = latitude;
+      travels.travelListId = travelList;
+      const diary = new DiaryEntity();
+      diary.body = travelBody;
+      travels.diaris = [diary];
+      await manager.save(travels);
+
       console.log(travelList);
 
       console.log(user.travelList);
@@ -74,21 +87,10 @@ export class TravelService {
   }
 
   private async saveTravelUsingTransaction(
-    travelName: string,
-    longitude: number,
-    latitude: number,
-    travelBody: string,
+    
   ) {
     await this.connection.transaction(async (manager) => {
-      const travels = new TravelsEntity();
-      travels.travelName = travelName;
-      travels.longitude = longitude;
-      travels.latitude = latitude;
-      const diary = new DiaryEntity();
-      diary.body = travelBody;
-      travels.diaris = [diary];
-      await this.travelListRepository.save(travels);
-      await manager.save(travels);
+      
     });
   }
 }
