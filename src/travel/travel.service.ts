@@ -68,8 +68,6 @@ export class TravelService {
       const diary = new DiaryEntity();
       diary.body = travelBody;
       travels.diaris = [diary];
-      await manager.save(travels);
-
       console.log(travelList);
 
       console.log(user.travelList);
