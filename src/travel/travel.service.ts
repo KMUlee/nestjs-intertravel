@@ -24,6 +24,7 @@ export class TravelService {
     if (!user) {
       throw new UnprocessableEntityException('해당 유저가 존재하지 않습니다.');
     } else {
+      console.log(user.travelList);
       return user.travelList;
     }
   }
