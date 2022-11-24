@@ -64,7 +64,7 @@ export class UsersService {
     }
   }
 
-  async login(emailAddress: string, password: string): Promise<string> {
+  async login(emailAddress: string, password: string): Promise<object> {
     const userExist = await this.checkUserExists(emailAddress);
     if (!userExist) {
       throw new UnprocessableEntityException('해당 이메일을 찾을 수 없습니다.');
@@ -77,7 +77,11 @@ export class UsersService {
       throw new UnprocessableEntityException('비밀번호를 다시 확인하십시오');
     }
 
-    return userLogin.id;
+    const loginData = {
+      token: userLogin.id,
+    };
+
+    return loginData;
   }
 
   async getProfile() {

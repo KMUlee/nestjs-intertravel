@@ -10,7 +10,7 @@ export class UsersController {
   constructor(readonly userService: UsersService) {}
 
   @Post('/login')
-  async login(@Body() loginData: LoginUserDto): Promise<string> {
+  async login(@Body() loginData: LoginUserDto): Promise<object> {
     console.log('users/login Post ->', loginData);
     const { email, password } = loginData;
 
