@@ -13,7 +13,7 @@ export class UsersService {
     private connection: Connection,
   ) {}
 
-  async createUser(name: string, email: string, password: string) {
+  async createUser(name: string, email: string, password: string):Promise<object> {
     const userExist = await this.checkUserExists(email);
 
     if (userExist) {

@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 import { TravelListEntity } from './travelList.entity';
+import { TravelsEntity } from './travels.entity';
 
 @Entity('User')
 export class UserEntity {
@@ -15,6 +16,6 @@ export class UserEntity {
   @Column({ length: 30 })
   password: string;
 
-  @OneToMany(() => TravelListEntity, (travelList) => travelList.userId)
-  travelList: TravelListEntity[];
+  @OneToMany(() => TravelsEntity, (travel) => travel.id)
+  travelList: TravelsEntity[];
 }
