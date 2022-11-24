@@ -25,7 +25,7 @@ export class TravelService {
   async travelList(userToken: string) {
     //not implement
     // const user = await this.userRepository.findOneBy({ id: userToken });
-    const user = await this.userRepository.findOne({where: {id: userToken}, relations: ['travelList']});
+    const user = await this.userRepository.findOne({where: {id: userToken}, relations: ['travels']});
     if (!user) {
       throw new UnprocessableEntityException('해당 유저가 존재하지 않습니다.');
     } else {
