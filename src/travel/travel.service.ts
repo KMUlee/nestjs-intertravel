@@ -66,8 +66,9 @@ export class TravelService {
         user.travelList.push(travel);
       }
       console.log('After', user.travelList);
-      await this.userRepository.update(user, user.travelList);
+      await this.userRepository.save("user");
       await manager.save(user);
+      
       console.log(travel.id);
     });
   }
