@@ -31,7 +31,7 @@ export class TravelService {
     } else {
       console.log("travle List ->",user.travelList);
       
-      const travelOne  = await this.travelListRepository.find({where: {userId: user.travelList}, relations: ['travels']});
+      const travelOne  = await this.travelListRepository.find({relations: ['travels']});
       console.log("travle One ->",travelOne);
       const travelContent = await this.travelsRepository.findOne({where: {id: travelOne[0].id}, relations: ['diaris']});
       console.log("travle Content ->",travelContent);
