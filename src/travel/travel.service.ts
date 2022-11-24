@@ -71,6 +71,7 @@ export class TravelService {
       const diary = new DiaryEntity();
       diary.body = travelBody;
       travels.diaris = [diary];
+      diary.travelId = travels;
       console.log(travelList);
 
       console.log(user.travelList);
