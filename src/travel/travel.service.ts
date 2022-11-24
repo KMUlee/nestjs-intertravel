@@ -26,8 +26,8 @@ export class TravelService {
       throw new UnprocessableEntityException('해당 유저가 존재하지 않습니다.');
     } else {
       console.log(user.travelList);
-      const travelOne  = user.travelList[0];
-      return travelOne.travels;
+      const travelOne  = await this.travelListRepository.findOne({where: {id: user.travelList[0].id}, relations: ['travels']});
+      return travelOne;
     }
   }
 
