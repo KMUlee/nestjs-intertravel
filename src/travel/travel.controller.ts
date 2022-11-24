@@ -8,9 +8,9 @@ export class TravelController {
   constructor(readonly travelService: TravelService) {}
 
   @Post('/list')
-  async getTravelList(@Body() body):Promise<Object> {
-    console.log(body);
-    return this.travelService.travelList(body['token']);
+  async getTravelList(@Body() dot):Promise<Object> {
+    console.log(dot);
+    return this.travelService.travelList(dot.token);
   } 
 
   @Post('/maps')
