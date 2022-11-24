@@ -6,6 +6,7 @@ import { TravelsEntity } from 'src/entities/travels.entity';
 import { UserEntity } from '../entities/user.entity';
 import { TravelController } from './travel.controller';
 import { TravelService } from './travel.service';
+import {  PicsEntity } from 'src/entities/pics.entity';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { TravelService } from './travel.service';
     TypeOrmModule.forFeature([TravelListEntity]),
     TypeOrmModule.forFeature([TravelsEntity]),
     TypeOrmModule.forFeature([DiaryEntity]),
+    TypeOrmModule.forFeature([PicsEntity]),
   ],
   controllers: [TravelController],
   providers: [TravelService],
