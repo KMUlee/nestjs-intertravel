@@ -7,7 +7,6 @@ import {
 } from 'typeorm';
 import { DiaryEntity } from './diary.entity';
 import { PicsEntity } from './pics.entity';
-import { TravelListEntity } from './travelList.entity';
 
 @Entity('Travels')
 export class TravelsEntity {
@@ -16,9 +15,6 @@ export class TravelsEntity {
 
   @Column({ length: 30 })
   travelName: string;
-
-  @ManyToOne(() => TravelListEntity, (travelList) => travelList.id)
-  travelListId: TravelListEntity;
 
   @OneToMany(() => DiaryEntity, (diary) => diary.travelId)
   diaris: DiaryEntity[];

@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DiaryEntity } from 'src/entities/diary.entity';
-import { TravelListEntity } from 'src/entities/travelList.entity';
 import { TravelsEntity } from 'src/entities/travels.entity';
 import { UserEntity } from '../entities/user.entity';
 import { TravelController } from './travel.controller';
@@ -11,7 +10,6 @@ import {  PicsEntity } from 'src/entities/pics.entity';
 @Module({
   imports: [
     TypeOrmModule.forFeature([UserEntity]),
-    TypeOrmModule.forFeature([TravelListEntity]),
     TypeOrmModule.forFeature([TravelsEntity]),
     TypeOrmModule.forFeature([DiaryEntity]),
     TypeOrmModule.forFeature([PicsEntity]),
