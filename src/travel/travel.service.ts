@@ -27,9 +27,10 @@ export class TravelService {
     // const user = await this.userRepository.findOneBy({ id: userToken });
     const user = await this.userRepository.findOne({where: {id: userToken}});
     if (!user) {
+      console.log("throw");
       throw new UnprocessableEntityException('해당 유저가 존재하지 않습니다.');
     } else {
-      
+      console.log("pass user");
       const travelList  = await this.userRepository.find({relations: ['travelList']});
       console.log("travelList ->",travelList);
       const returnBody =[];
