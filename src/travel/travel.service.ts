@@ -18,6 +18,8 @@ export class TravelService {
     private connection: Connection,
     @InjectRepository(TravelsEntity)
     private travelsRepository: Repository<TravelsEntity>,
+    @InjectRepository(DiaryEntity)
+    private diaryRepository: Repository<DiaryEntity>,
     ) {}
 
   async travelList(userToken: string) {
@@ -29,7 +31,8 @@ export class TravelService {
     } else {
       console.log(user.travelList);
       const travelOne  = await this.travelListRepository.findOne({where: {id: user.travelList[0].id}, relations: ['travels']});
-      return travelOne;
+      const travelContent = await this.travelsRepository.findOne({where: {id: travelOne.travels[0].id}, relations: ['diaris']});
+      return travelContent;
     }
   }
 
@@ -82,6 +85,7 @@ export class TravelService {
       await manager.save(user);
       await this.travelListRepository.save(travelList);
       await this.travelsRepository.save(travels);
+      await this.diaryRepository.save(diary);
       
       console.log(travelList.id);
     });
