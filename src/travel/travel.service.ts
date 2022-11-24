@@ -109,10 +109,11 @@ export class TravelService {
       }
       travels.userId=user;
       console.log('After', user.travelList);
-      await manager.save(user);
       await this.travelsRepository.save(travels);
       await this.diaryRepository.save(diary);
       await this.picsRepository.save(pics);
+      await manager.save(user);
+
     });
   }
 

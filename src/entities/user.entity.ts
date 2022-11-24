@@ -15,6 +15,6 @@ export class UserEntity {
   @Column({ length: 30 })
   password: string;
 
-  @OneToMany(() => TravelsEntity, (travel) => travel.id)
+  @OneToMany(() => TravelsEntity, (travel) => travel.userId)
   travelList: TravelsEntity[];
 }
