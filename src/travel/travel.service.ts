@@ -22,7 +22,7 @@ export class TravelService {
     private picsRepository: Repository<PicsEntity>,
     ) {}
 
-  async travelList(userToken: string) {
+  async travelList(userToken) {
     //not implement
     // const user = await this.userRepository.findOneBy({ id: userToken });
     const user = await this.userRepository.findOne({where: {id: userToken}});
