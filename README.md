@@ -14,8 +14,7 @@
 
 ```mermaid
 erDiagram
-    USER ||--|{ TRAVEL_LIST : allow
-    TRAVEL_LIST ||--|{ TRAVEL: contains
+    USER ||--|{ TRAVEL : allow
     TRAVEL || -- |{ DIARY : contains
     TRAVEL || -- |{ PICS : contains
 
@@ -27,10 +26,6 @@ erDiagram
       string name
     }
 
-    TRAVEL_LIST {
-      string userID FK
-      number id PK
-    }
 
     TRAVEL {
       number id PK
