@@ -14,7 +14,7 @@
 
 ```mermaid
 erDiagram
-    USER ||--|{ TRAVEL : allow
+    USER ||--|{ TRAVEL : contains
     TRAVEL || -- |{ DIARY : contains
     TRAVEL || -- |{ PICS : contains
 
