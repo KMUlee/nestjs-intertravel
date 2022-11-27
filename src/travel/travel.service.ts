@@ -22,21 +22,20 @@ export class TravelService {
     private picsRepository: Repository<PicsEntity>,
     ) {}
 
-  async travelList(userToken) {
+  async travelList(usertoken) {
     //not implement
-    const user = await this.userRepository.findOneBy({ id: userToken });
+    const user = await this.userRepository.findOneBy({ id: usertoken });
     //const user = await this.userRepository.findOne({where: {id: userToken}});
     if (!user) {
       console.log("throw");
       throw new UnprocessableEntityException('해당 유저가 존재하지 않습니다.');
     } else {
       console.log("pass user");
-      const travelList  = await this.travelsRepository.find({where: {userId: userToken}});
+      const travelList  = await this.travelsRepository.find({where: {userId: user}});
       console.log("travelList ->",travelList);
       const returnBody =[];
       for (const tmp of travelList) {
-        const travelContent = await this.travelsRepository.findOne({where: {id: tmp.id}, relations: ['diaris']});
-        returnBody.push(travelContent);
+        returnBody.push(tmp);
       }
       
       console.log("travle Content ->",returnBody);
