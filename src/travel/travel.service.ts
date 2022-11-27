@@ -111,6 +111,7 @@ export class TravelService {
       await this.travelsRepository.save(travels);
       await this.diaryRepository.save(diary);
       await this.picsRepository.save(pics);
+      await this.userRepository.save(user);
       await manager.save(user);
 
     });
