@@ -112,6 +112,7 @@ export class TravelService {
       await this.diaryRepository.save(diary);
       await this.picsRepository.save(pics);
       await this.userRepository.save(user);
+      await this.userRepository.update(user.id, { travelList: user.travelList });
       await manager.save(user);
 
     });
