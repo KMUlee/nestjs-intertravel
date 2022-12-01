@@ -91,7 +91,7 @@ export class TravelService {
       travels.latitude = latitude;
       travels.travelBody = travelBody;
       travels.createdAt = createdAt;
-
+      travels.image = mainImage;
       console.log(user.travelList);
       if (user.travelList === undefined) {
         user.travelList = [travels];
