@@ -24,7 +24,7 @@ export class TravelController {
 
   @Post('/create')
   @UseInterceptors(FileInterceptor('mainImage'))
-  handleFile(@UploadedFiles() files: Express.Multer.File[]) {
+  handleUpload(@UploadedFiles() files: Express.Multer.File) {
     console.log(files);
   }
   async createTravelList(@Body() travelData: travelCreateDto): Promise<void> {
