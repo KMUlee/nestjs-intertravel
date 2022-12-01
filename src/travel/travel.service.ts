@@ -56,7 +56,7 @@ export class TravelService {
           travelName: tmp.travelName,
         });
       }
-      return returnBody;
+      return {travelList: returnBody};
     }
   }
   
@@ -109,6 +109,7 @@ export class TravelService {
 
     });
   }
+
 
   
 }
