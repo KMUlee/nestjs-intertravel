@@ -2,11 +2,17 @@ import { existsSync, mkdirSync } from 'fs';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { v4 as uuid } from 'uuid';
+import * as dotenv from 'dotenv';
+import * as path from 'path';
+
+dotenv.config({
+  path: path.resolve('.development.env'),
+});
 
 export const multerOptions = {
   storage: diskStorage({
     destination: (req, file, cb) => {
-      const uploadPath: string = '/uploads';
+      const uploadPath: string = './uploads';
       if (!existsSync(uploadPath)) {
         mkdirSync(uploadPath);
       }
@@ -19,7 +25,7 @@ export const multerOptions = {
 };
 
 export const createImageURL = (file): string => {
-  const serverAddress: string = '144.24.81.38:3000';
+  const serverAddress: string = dotenv.config().parsed.SERVER_ADDRESS;
   return `${serverAddress}/uploads/${file.path}`;
 };
 
