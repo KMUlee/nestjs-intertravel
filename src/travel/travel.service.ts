@@ -64,7 +64,7 @@ export class TravelService {
     travelBody: string,
     createdAt:string,mainImage:string
   ) {
-    const user = await this.userRepository.findOneBy({ id: userToken });
+    const user = await this.userRepository.findOne({ where: { id: userToken}, relations: ['travelList'] });
     if (!user) {
       throw new UnprocessableEntityException('해당 유저가 존재하지 않습니다.');
     } else {
