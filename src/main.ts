@@ -6,7 +6,6 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.use('../inter-image', express.static(join(__dirname,'../inter-image')));
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
