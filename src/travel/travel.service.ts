@@ -7,6 +7,7 @@ import { UserEntity } from '../entities/user.entity';
 import { TravelsEntity } from '../entities/travels.entity';
 import { DiaryEntity } from '../entities/diary.entity';
 import { PicsEntity } from 'src/entities/pics.entity';
+import { createImageURL } from 'src/lib/multerOptions';
 
 @Injectable()
 export class TravelService {
@@ -110,6 +111,9 @@ export class TravelService {
     });
   }
 
+  async uploadFileDisk(file: File): Promise<string>{
+    return createImageURL(file);
+  }
 
   
 }

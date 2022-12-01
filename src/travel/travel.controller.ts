@@ -23,11 +23,16 @@ export class TravelController {
 
 
   @Post('/create')
-  @UseInterceptors(FilesInterceptor('images',null,multerOptions))
+  
+  @UseInterceptors(FilesInterceptor('mainImage',null,multerOptions))
+  @Bind(UploadedFiles())
+  UploadFile(mainImage) {
+    console.log(mainImage);
+  }
   async createTravelList(@Body() travelData: travelCreateDto): Promise<void> {
     const { userToken, latitude, longitude, travelName, travelBody,createdAt,mainImage } =
       travelData;
-      const imageUrl = UploadService.uploadService.uploadFile(mainImage);
+    const data = await this.travelService.uploadFileDisk(mainImage);
     return this.travelService.createTravel(
       userToken,
       longitude,
@@ -35,7 +40,7 @@ export class TravelController {
       travelName,
       travelBody,
       createdAt,
-      imageUrl,
+      data,
     );
   }
   

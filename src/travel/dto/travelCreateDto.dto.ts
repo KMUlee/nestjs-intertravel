@@ -19,7 +19,7 @@ export class travelCreateDto {
   @IsString()
   readonly createdAt: string;
 
-  @IsString()
-  readonly mainImage: string;
+
+  readonly mainImage: File;
   
 }
