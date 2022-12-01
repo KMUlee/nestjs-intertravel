@@ -33,6 +33,7 @@ export class TravelController {
     const { userToken, latitude, longitude, travelName, travelBody,createdAt,mainImage } =
       travelData;
     const data = await this.travelService.uploadFileDisk(mainImage);
+    console.log("this is data :",data);
     return this.travelService.createTravel(
       userToken,
       longitude,
