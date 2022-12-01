@@ -1,5 +1,5 @@
 import { Bind, Body, Controller, Get, Param, Post, Res, UploadedFiles, UseInterceptors } from '@nestjs/common';
-import { FilesInterceptor } from '@nestjs/platform-express/multer';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express/multer';
 import { multerOptions } from 'src/lib/multerOptions';
 import { travelCreateDto } from './dto/travelCreateDto.dto';
 import { TravelService } from './travel.service';
@@ -23,11 +23,9 @@ export class TravelController {
 
 
   @Post('/create')
-  
-  @UseInterceptors(FilesInterceptor('mainImage',null,multerOptions))
-  @Bind(UploadedFiles())
-  UploadFile(mainImage) {
-    console.log(mainImage);
+  @UseInterceptors(FileInterceptor('file'))
+  handleFile(@UploadedFiles() files: Express.Multer.File[]) {
+    console.log(files);
   }
   async createTravelList(@Body() travelData: travelCreateDto): Promise<void> {
     const { userToken, latitude, longitude, travelName, travelBody,createdAt,mainImage } =
