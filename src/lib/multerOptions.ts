@@ -25,7 +25,7 @@ export const multerOptions = {
 };
 
 export const createImageURL = (file): string => {
-  const serverAddress: string = dotenv.config().parsed.SERVER_ADDRESS;
+  const serverAddress: string = process.env.SERVER_ADDRESS;
   return `${serverAddress}/uploads/${file.path}`;
 };
 
