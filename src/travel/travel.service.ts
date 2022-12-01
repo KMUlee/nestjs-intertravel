@@ -51,7 +51,7 @@ export class TravelService {
       const returnBody =[];
       for (const tmp of user.travelList) {
         returnBody.push({
-          logitude: tmp.longitude,
+          longitude: tmp.longitude,
           latitude: tmp.latitude,
           travelName: tmp.travelName,
         });
