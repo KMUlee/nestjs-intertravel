@@ -23,7 +23,7 @@ export class TravelController {
 
 
   @Post('/create')
-  @UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(FileInterceptor('mainImage'))
   handleFile(@UploadedFiles() files: Express.Multer.File[]) {
     console.log(files);
   }
