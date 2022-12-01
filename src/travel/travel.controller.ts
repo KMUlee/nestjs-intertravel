@@ -61,5 +61,6 @@ export class TravelController {
   @UseInterceptors(FileInterceptor('file', multerOptions))
   handleUpload(@UploadedFile() file: Express.Multer.File) {
     console.log(file);
+    return file.path;
   }
 }
