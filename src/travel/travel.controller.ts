@@ -14,7 +14,7 @@ import {
   FileInterceptor,
   FilesInterceptor,
 } from '@nestjs/platform-express/multer';
-import { multerOptions } from 'src/lib/multerOptions';
+import { createImageURL, multerOptions } from 'src/lib/multerOptions';
 import { travelCreateDto } from './dto/travelCreateDto.dto';
 import { TravelService } from './travel.service';
 import { UploadService } from './upload.service';
@@ -61,6 +61,6 @@ export class TravelController {
   @UseInterceptors(FileInterceptor('file', multerOptions))
   handleUpload(@UploadedFile() file: Express.Multer.File) {
     console.log(file);
-    return file.path;
+    return createImageURL(file);
   }
 }
