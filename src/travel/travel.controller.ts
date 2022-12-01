@@ -18,6 +18,8 @@ export class TravelController {
     return this.travelService.getMapsTravelList(body.token);
   }
 
+
+  
   @Post('/create')
   async createTravelList(@Body() travelData: travelCreateDto): Promise<void> {
     const { userToken, latitude, longitude, travelName, travelBody,createdAt,mainImage } =
