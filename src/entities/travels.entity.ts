@@ -15,7 +15,7 @@ export class TravelsEntity {
   @Column({ length: 30 })
   travelName: string;
 
-  @Column()
+  @Column({type: 'longtext'})
   travelBody: string;
 
   @ManyToOne(() => UserEntity, (user) => user.id)
