@@ -15,7 +15,7 @@ export class TravelController {
 
   @Post('/maps')
   async getMapsTravelList(@Body() body):Promise<Object> {
-    return this.getMapsTravelList(body.token);
+    return this.travelService.getMapsTravelList(body.token);
   }
 
   @Post('/create')

@@ -48,11 +48,15 @@ export class TravelService {
     if (!user) {
       throw new UnprocessableEntityException('해당 유저가 존재하지 않습니다.');
     } else {
-      const travelOne  = await this.userRepository.find({relations: ['travels']});
       const returnBody =[];
-      for (const tmp of travelOne) {
-        returnBody.push([]);
+      for (const tmp of user.travelList) {
+        returnBody.push({
+          logitude: tmp.longitude,
+          latitude: tmp.latitude,
+          travelName: tmp.travelName,
+        });
       }
+      return returnBody;
     }
   }
   
