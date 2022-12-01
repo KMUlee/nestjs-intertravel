@@ -19,11 +19,12 @@ export class TravelController {
   }
 
 
-  
+
   @Post('/create')
   async createTravelList(@Body() travelData: travelCreateDto): Promise<void> {
     const { userToken, latitude, longitude, travelName, travelBody,createdAt,mainImage } =
       travelData;
+    constructor(readonly travelService: TravelService) {}
     return this.travelService.createTravel(
       userToken,
       longitude,
