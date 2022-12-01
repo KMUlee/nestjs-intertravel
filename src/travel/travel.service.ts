@@ -81,22 +81,13 @@ export class TravelService {
     latitude: number,
     travelBody: string,mainImage:string,createdAt:string) {
     await this.connection.transaction(async (manager) => {
-      
-      const pics = new PicsEntity();
-      pics.image = mainImage;
-      
-      
       const travels = new TravelsEntity();
       travels.travelName = travelName;
       travels.longitude = longitude;
       travels.latitude = latitude;
-      const diary = new DiaryEntity();
-      diary.body = travelBody;
-      travels.diaris = [diary];
-      diary.travelId = travels;
-      pics.travelId = travels;
+      travels.travelBody = travelBody;
       travels.createdAt = createdAt;
-
+      
       console.log(user.travelList);
       if (user.travelList === undefined) {
         user.travelList = [travels];
@@ -109,8 +100,6 @@ export class TravelService {
       travels.userId=user;
       console.log('After', user.travelList);
       await this.travelsRepository.save(travels);
-      await this.diaryRepository.save(diary);
-      await this.picsRepository.save(pics);
       await this.userRepository.save(user);
       await manager.save(user);
 
