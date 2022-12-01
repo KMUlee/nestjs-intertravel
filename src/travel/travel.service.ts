@@ -21,35 +21,40 @@ export class TravelService {
     private diaryRepository: Repository<DiaryEntity>,
     @InjectRepository(PicsEntity)
     private picsRepository: Repository<PicsEntity>,
-    ) {}
+  ) {}
 
   async travelList(usertoken) {
     //not implement
     const user = await this.userRepository.findOneBy({ id: usertoken });
     //const user = await this.userRepository.findOne({where: {id: userToken}});
     if (!user) {
-      console.log("throw");
+      console.log('throw');
       throw new UnprocessableEntityException('해당 유저가 존재하지 않습니다.');
     } else {
-      console.log("pass user");
-      const travelList  = await this.travelsRepository.find({where: {userId: user}});
-      console.log("travelList ->",travelList);
-      const returnBody =[];
+      console.log('pass user');
+      const travelList = await this.travelsRepository.find({
+        where: { userId: user },
+      });
+      console.log('travelList ->', travelList);
+      const returnBody = [];
       for (const tmp of travelList) {
         returnBody.push(tmp);
       }
-      
-      console.log("travle Content ->",returnBody);
+
+      console.log('travle Content ->', returnBody);
       return returnBody;
     }
   }
 
-  async getMapsTravelList(userToken:string) {
-    const user = await this.userRepository.findOne({where: {id: userToken}, relations: ['travelList']});
+  async getMapsTravelList(userToken: string) {
+    const user = await this.userRepository.findOne({
+      where: { id: userToken },
+      relations: ['travelList'],
+    });
     if (!user) {
       throw new UnprocessableEntityException('해당 유저가 존재하지 않습니다.');
     } else {
-      const returnBody =[];
+      const returnBody = [];
       for (const tmp of user.travelList) {
         returnBody.push({
           longitude: tmp.longitude,
@@ -57,34 +62,47 @@ export class TravelService {
           travelName: tmp.travelName,
         });
       }
-      return {travelList: returnBody};
+      return { travelList: returnBody };
     }
   }
-  
+
   async createTravel(
     userToken: string,
     longitude: number,
     latitude: number,
     travelName: string,
     travelBody: string,
-    createdAt:string,mainImage:string
+    createdAt: string,
+    mainImage: string,
   ) {
-    const user = await this.userRepository.findOne({ where: { id: userToken}, relations: ['travelList'] });
+    const user = await this.userRepository.findOne({
+      where: { id: userToken },
+      relations: ['travelList'],
+    });
     if (!user) {
       throw new UnprocessableEntityException('해당 유저가 존재하지 않습니다.');
     } else {
-      await this.saveTravelListUsingTransaction(user, travelName,
+      await this.saveTravelListUsingTransaction(
+        user,
+        travelName,
         longitude,
         latitude,
-        travelBody,mainImage,createdAt);
-      
+        travelBody,
+        mainImage,
+        createdAt,
+      );
     }
   }
 
-  private async saveTravelListUsingTransaction(user: UserEntity,travelName: string,
+  private async saveTravelListUsingTransaction(
+    user: UserEntity,
+    travelName: string,
     longitude: number,
     latitude: number,
-    travelBody: string,mainImage:string,createdAt:string) {
+    travelBody: string,
+    mainImage: string,
+    createdAt: string,
+  ) {
     await this.connection.transaction(async (manager) => {
       const travels = new TravelsEntity();
       travels.travelName = travelName;
@@ -97,23 +115,19 @@ export class TravelService {
       if (user.travelList === undefined) {
         user.travelList = [travels];
         this.travelsRepository.save(travels);
-
       } else {
         user.travelList.push(travels);
         this.travelsRepository.save(travels);
       }
-      travels.userId=user;
+      travels.userId = user;
       console.log('After', user.travelList);
       await this.travelsRepository.save(travels);
       await this.userRepository.save(user);
       await manager.save(user);
-
     });
   }
 
-  async uploadFileDisk(file: File): Promise<string>{
+  async uploadFileDisk(file: File): Promise<string> {
     return createImageURL(file);
   }
-
-  
 }
