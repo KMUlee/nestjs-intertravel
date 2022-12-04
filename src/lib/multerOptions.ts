@@ -24,10 +24,10 @@ export const multerOptions = {
   }),
 };
 
-export const createImageURL = (file): object => {
+export const createImageURL = (file): string => {
   const serverAddress: string = process.env.SERVER_ADDRESS;
   const obj = { fileurl: `${serverAddress}/${file.path}` };
-  return obj;
+  return `${serverAddress}/${file.path}`;
 };
 
 export const changeImageName = (file): string => {
