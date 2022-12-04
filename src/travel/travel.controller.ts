@@ -1,6 +1,6 @@
 import { Bind, Body, Controller, Get, Param, Post, Res, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express/multer';
-import { multerOptions } from 'src/lib/multerOptions';
+import { multerOptions,createImageURL } from 'src/lib/multerOptions';
 import { travelCreateDto } from './dto/travelCreateDto.dto';
 import { TravelService } from './travel.service';
 import { UploadService } from './upload.service';
