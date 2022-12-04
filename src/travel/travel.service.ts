@@ -127,7 +127,5 @@ export class TravelService {
     });
   }
 
-  async uploadFileDisk(file: File): Promise<string> {
-    return createImageURL(file);
-  }
+  
 }
