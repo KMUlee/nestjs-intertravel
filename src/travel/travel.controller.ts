@@ -39,7 +39,7 @@ export class TravelController {
   }
   @Post('/upload')
   @UseInterceptors(FileInterceptor('file', multerOptions))
-  handleUpload(@UploadedFile() file: Express.Multer.File) {
+  async handleUpload(@UploadedFile() file: Express.Multer.File):Promise<string> {
     console.log(file);
     return createImageURL(file);
   }
