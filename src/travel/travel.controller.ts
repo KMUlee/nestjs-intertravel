@@ -37,6 +37,11 @@ export class TravelController {
       mainImage,
     );
   }
-  
+  @Post('/upload')
+  @UseInterceptors(FileInterceptor('file', multerOptions))
+  handleUpload(@UploadedFile() file: Express.Multer.File) {
+    console.log(file);
+    return createImageURL(file);
+  }
 
 }
