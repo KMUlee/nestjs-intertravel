@@ -20,6 +20,6 @@ export class travelCreateDto {
   readonly createdAt: string;
 
 
-  readonly mainImage: File;
+  readonly mainImage: string;
   
 }
