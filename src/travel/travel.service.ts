@@ -126,6 +126,8 @@ export class TravelService {
       await manager.save(user);
     });
   }
-
+  async uploadFileDisk(file: File):Promise<Object> {
+    return createImageURL(file);
+  }
   
 }
