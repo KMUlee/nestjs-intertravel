@@ -53,7 +53,7 @@ export class UsersController {
   }
 
   @Post('/userpage')
-  async getUserPage(@Body() userData: UserTokenDto) {
+  async getUserPage(@Body() userData: UserTokenDto):Promise<object> {
     console.log('users/userpage Post ->', userData);
     const { token } = userData;
 
