@@ -2,6 +2,7 @@ import { Bind, Body, Controller, Get, Param, Post, Res, UploadedFile, UploadedFi
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express/multer';
 import { multerOptions,createImageURL } from 'src/lib/multerOptions';
 import { travelCreateDto } from './dto/travelCreateDto.dto';
+import { travelUserTokenDto } from './dto/travelUserToken.dto';
 import { TravelService } from './travel.service';
 import { UploadService } from './upload.service';
 
@@ -10,14 +11,18 @@ export class TravelController {
   constructor(readonly travelService: TravelService) {}
 
   @Post('/list')
-  async getTravelList(@Body() dot):Promise<Object> {
-    console.log(dot);
-    return this.travelService.travelList(dot.token);
+  async getTravelList(@Body() dot:travelUserTokenDto):Promise<Object> {
+    
+    console.log("travel -> list",dot);
+    const {userToken} = dot
+    return this.travelService.travelList(userToken);
   } 
 
   @Post('/maps')
-  async getMapsTravelList(@Body() body):Promise<Object> {
-    return this.travelService.getMapsTravelList(body.token);
+  async getMapsTravelList(@Body() body:travelUserTokenDto):Promise<Object> {
+    const {userToken} = body;
+    console.log("travel -> maps",userToken);
+    return this.travelService.getMapsTravelList(userToken);
   }
 
 
