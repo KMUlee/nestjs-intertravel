@@ -49,4 +49,6 @@ export class TravelController {
     return createImageURL(file);
   }
 
+  
+
 }

@@ -88,4 +88,14 @@ export class UsersService {
   async getProfile() {
     return this.connection.query('select id, name, email from User');
   }
+
+  async getUserPage(userToken: string):Promise<object> {
+    const user = await this.usersRepository.findOne({
+      where: { id: userToken },
+      relations: ['travelList'],
+    });
+    const jso ={"libraryLength":user.travelList.length, "name":user.name, "email":user.email}
+    console.log('user page -> ', user);
+    return jso
+  }
 }

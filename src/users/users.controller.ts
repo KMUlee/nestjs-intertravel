@@ -51,4 +51,13 @@ export class UsersController {
     const { email, name, password } = registData;
     return this.userService.createUser(name, email, password);
   }
+
+  @Post('/userpage')
+  async getUserPage(@Body() userData: UserTokenDto) {
+    console.log('users/userpage Post ->', userData);
+    const { token } = userData;
+
+    //not implement
+    return this.userService.getUserPage(token);
+  }
 }
