@@ -94,8 +94,13 @@ export class UsersService {
       where: { id: userToken },
       relations: ['travelList'],
     });
-    const jso ={"libraryLength":user.travelList.length, "name":user.name, "email":user.email}
-    console.log('user page -> ', user);
-    return jso
-  }
+    if (!user) {
+      throw new UnprocessableEntityException('해당 이메일을 찾을 수 없습니다.');
+    }else{
+      const jso ={"libraryLength":user.travelList.length, "name":user.name, "email":user.email}
+      console.log('user page -> ', user);
+      return jso
+    }
+    }
+    
 }
