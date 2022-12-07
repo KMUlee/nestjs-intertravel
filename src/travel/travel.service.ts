@@ -140,14 +140,23 @@ export class TravelService {
     if (!user) {
       throw new UnprocessableEntityException('해당 유저가 존재하지 않습니다.');
     } else {
-      const returnBody = [];
-      for (const tmp of user.travelList) {
-        if (tmp.travelName.includes(search)) {
-          returnBody.push(tmp);
-        }
+      if ( search === undefined || search === null || search === '') {
+        return { travelList: user.travelList };
       }
-      return { travelList: returnBody };
-    }
+        else{
+          const returnBody = [];
+          for (const tmp of user.travelList) {
+            if (tmp.travelName.includes(search)) {
+              returnBody.push(tmp);
+            }
+          }
+          return { travelList: returnBody };
+        }
+      
+    
   }
-  
 }
+}
+
+  
+
