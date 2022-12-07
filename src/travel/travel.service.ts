@@ -61,6 +61,7 @@ export class TravelService {
           longitude: tmp.longitude,
           latitude: tmp.latitude,
           travelName: tmp.travelName,
+          travelImage:tmp.image,
         });
       }
       return { travelList: returnBody };
