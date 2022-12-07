@@ -5,8 +5,6 @@ import { Connection, Repository } from 'typeorm';
 
 import { UserEntity } from '../entities/user.entity';
 import { TravelsEntity } from '../entities/travels.entity';
-import { DiaryEntity } from '../entities/diary.entity';
-import { PicsEntity } from 'src/entities/pics.entity';
 import { createImageURL } from 'src/lib/multerOptions';
 
 @Injectable()
@@ -17,10 +15,7 @@ export class TravelService {
     private connection: Connection,
     @InjectRepository(TravelsEntity)
     private travelsRepository: Repository<TravelsEntity>,
-    @InjectRepository(DiaryEntity)
-    private diaryRepository: Repository<DiaryEntity>,
-    @InjectRepository(PicsEntity)
-    private picsRepository: Repository<PicsEntity>,
+    
   ) {}
 
   async travelList(usertoken) {
