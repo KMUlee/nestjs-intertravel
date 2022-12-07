@@ -34,10 +34,10 @@ export class UsersController {
   @Post('/diary')
   async listDiary(@Body() userData: UserTokenDto) {
     console.log('users/diary Post ->', userData);
-    const { token } = userData;
+    const { userToken } = userData;
 
     //not implement
-    return this.userService.travelList(token);
+    return this.userService.travelList(userToken);
   }
 
   @Get()
@@ -55,9 +55,9 @@ export class UsersController {
   @Post('/userpage')
   async getUserPage(@Body() userData: UserTokenDto):Promise<object> {
     console.log('users/userpage Post ->', userData);
-    const { token } = userData;
+    const { userToken } = userData;
 
     //not implement
-    return this.userService.getUserPage(token);
+    return this.userService.getUserPage(userToken);
   }
 }
