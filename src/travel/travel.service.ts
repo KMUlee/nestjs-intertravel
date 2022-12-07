@@ -131,5 +131,23 @@ export class TravelService {
   async uploadFileDisk(file: File):Promise<Object> {
     return createImageURL(file);
   }
+
+  async searchTravel(userToken: string, search: string) {
+    const user = await this.userRepository.findOne({
+      where: { id: userToken },
+      relations: ['travelList'],
+    });
+    if (!user) {
+      throw new UnprocessableEntityException('해당 유저가 존재하지 않습니다.');
+    } else {
+      const returnBody = [];
+      for (const tmp of user.travelList) {
+        if (tmp.travelName.includes(search)) {
+          returnBody.push(tmp);
+        }
+      }
+      return { travelList: returnBody };
+    }
+  }
   
 }

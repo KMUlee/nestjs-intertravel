@@ -3,6 +3,7 @@ import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express/mult
 import { multerOptions,createImageURL } from 'src/lib/multerOptions';
 import { travelCreateDto } from './dto/travelCreateDto.dto';
 import { travelUserTokenDto } from './dto/travelUserToken.dto';
+import { travelSearchDto } from './dto/travelSearchDto.dto';
 import { TravelService } from './travel.service';
 import { UploadService } from './upload.service';
 
@@ -49,6 +50,10 @@ export class TravelController {
     return createImageURL(file);
   }
 
-  
+  @Post('/search')
+  async searchTravel(@Body() body:travelSearchDto):Promise<Object> {
+    const {userToken, search} = body;
+    return this.travelService.searchTravel(userToken, search);
+  }
 
 }
