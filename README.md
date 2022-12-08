@@ -14,9 +14,6 @@
 ```mermaid
 erDiagram
     USER ||--|{ TRAVEL : contains
-    TRAVEL || -- |{ DIARY : contains
-    TRAVEL || -- |{ PICS : contains
-
 
     USER {
       string id PK
