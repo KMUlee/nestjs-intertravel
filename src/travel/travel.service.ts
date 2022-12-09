@@ -57,6 +57,7 @@ export class TravelService {
           latitude: tmp.latitude,
           travelName: tmp.travelName,
           travelImage:tmp.image,
+          travelDate:tmp.createdAt,
         });
       }
       return { travelList: returnBody };
